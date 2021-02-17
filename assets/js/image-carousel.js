@@ -30,8 +30,6 @@ lastSlideClone.src = imageArea.lastElementChild.src;
 imageArea.appendChild(firstSlideClone);
 imageArea.insertBefore(lastSlideClone, imageArea.firstElementChild);
 
-console.log(firstSlideClone, ' : ', lastSlideClone);
-
 let slide = 1;
 
 const buttons = {
@@ -71,9 +69,11 @@ const nextTransitionEnd = () => {
 }
 
 const nextSlide = () => {
-	imageArea.style.transition = 'transform 350ms ease-in-out';
-	imageArea.style.transform = `translateX(-${++slide * 100}%)`;
-	imageArea.addEventListener('transitionend', nextTransitionEnd);
+	if (slide <= carouselImages.length) {
+		imageArea.style.transition = 'transform 350ms ease-in-out';
+		imageArea.style.transform = `translateX(-${++slide * 100}%)`;
+		imageArea.addEventListener('transitionend', nextTransitionEnd);
+	}
 };
 
 const prevSlide = () => {
