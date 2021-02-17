@@ -90,14 +90,26 @@ const prevSlide = () => {
 	console.log(slide);
 };
 
+var autoSlide = null;
+
+const autoSlideFunc = () => {
+	if (imageCarousel.dataset.autoSlide != undefined || imageCarousel.dataset.autoSlide != null) {
+		autoSlide = setInterval(() => {
+			nextSlide();
+		}, parseInt(imageCarousel.dataset.autoSlide) * 1000)
+	}
+}
+
 imageCarousel.addEventListener('mouseenter', e => {
 	e.preventDefault();
 	window.addEventListener('keyup', carouselKeyDown);
+	clearInterval(autoSlide);
 });
 
 imageCarousel.addEventListener('mouseleave', e => {
 	e.preventDefault();
 	window.removeEventListener('keyup', carouselKeyDown);
+	autoSlideFunc();
 })
 
 buttons.prev.addEventListener('click', e => {
