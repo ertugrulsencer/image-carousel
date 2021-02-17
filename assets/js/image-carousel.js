@@ -33,6 +33,7 @@ imageArea.insertBefore(lastSlideClone, imageArea.firstElementChild);
 console.log(firstSlideClone, ' : ', lastSlideClone);
 
 let slide = 1;
+
 const buttons = {
 	prev: select('.image-carousel-prev'),
 	next: select('.image-carousel-next')
@@ -45,6 +46,17 @@ if (buttons.next.textContent.trim() == 'image_carousel_svg')
 	buttons.next.innerHTML = icons.nextIcon;
 
 imageArea.style.transform = `translateX(-100%)`;
+
+const carouselKeyDown = e => {
+	switch (e.key) {
+		case 'ArrowLeft':
+			prevSlide();
+			break;
+		case 'ArrowRight':
+			nextSlide();
+			break;
+	}
+}
 
 const nextTransitionEnd = () => {
 	if (slide > carouselImages.length) {
@@ -77,6 +89,16 @@ const prevSlide = () => {
 	});
 	console.log(slide);
 };
+
+imageCarousel.addEventListener('mouseenter', e => {
+	e.preventDefault();
+	window.addEventListener('keyup', carouselKeyDown);
+});
+
+imageCarousel.addEventListener('mouseleave', e => {
+	e.preventDefault();
+	window.removeEventListener('keyup', carouselKeyDown);
+})
 
 buttons.prev.addEventListener('click', e => {
 	e.preventDefault();
