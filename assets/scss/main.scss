@@ -19,15 +19,45 @@ body {
 	align-items: center;
 	justify-content: flex-start;
 	overflow: hidden;
+	position: relative;
+
+	&-next,
+	&-prev {
+		position: absolute;
+		border: 1px solid #f8f8f8;
+		border-radius: 50%;
+		width: 2.5rem;
+		height: 2.5rem;
+		background: #848484;
+		opacity: 0.6;
+		z-index: 10;
+		transition: opacity 350ms ease-in-out;
+		top: 50%;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+
+	&-next {
+		right: 0;
+		transform: translate(-100%, -50%);
+	}
+
+	&-prev {
+		left: 0;
+		transform: translate(100%, -50%);
+	}
 
 	.image-area {
 		width: inherit;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
-	}
 
-	img {
-		width: inherit;
+		img {
+			width: inherit;
+		}
 	}
 }
